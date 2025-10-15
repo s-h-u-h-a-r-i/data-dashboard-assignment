@@ -1,0 +1,14 @@
+[project]
+name = "data-dashboard-assignment-backend"
+version = "0.1.0"
+description = "FastAPI backend for the OpenTax dashboard, providing data simulation, aggregation, AI assistance, and observability."
+requires-python = ">=3.12"
+dependencies = [
+    "faker>=37.11.0",
+    "fastapi>=0.119.0",
+    "openai>=2.3.0",
+    "pydantic-settings>=2.11.0",
+    "python-dotenv>=1.1.1",
+    "sqlalchemy>=2.0.44",
+    "uvicorn[standard]>=0.37.0",
+]
