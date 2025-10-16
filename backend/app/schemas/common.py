@@ -7,7 +7,7 @@ class PaginationMetadata(BaseModel):
 
     page: int = Field(..., ge=1, description="Current page number")
     """Current page number (1-indexed)"""
-    paeg_size: int = Field(..., ge=1, le=100, description="Items per page")
+    page_size: int = Field(..., ge=1, le=100, description="Items per page")
     """Number of items per page"""
     total_items: int = Field(..., ge=0, description="Total number of items")
     """Total number of items across all pages"""
