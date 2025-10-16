@@ -15,16 +15,20 @@ class InvoiceStatus(StrEnum):
 class Invoice(Base):
     __tablename__ = "invoices"
 
-    id = Column(Integer, primary_key=True, index=True)
-    invoice_number = Column(String, unique=True, nullable=False, index=True)
-    amount = Column(Float, nullable=False)
-    currency = Column(String, default="ZAR", nullable=False)
-    status = Column(Enum(InvoiceStatus), nullable=False)
-    due_date = Column(DateTime, nullable=False)
-    issue_date = Column(DateTime, nullable=False)
-    customer_name = Column(String, nullable=False)
-    description = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.now, nullable=False)
+    id: Column[int] = Column(Integer, primary_key=True, index=True)
+    invoice_number: Column[str] = Column(
+        String, unique=True, nullable=False, index=True
+    )
+    amount: Column = Column(Float, nullable=False)
+    currency: Column[str] = Column(String, default="ZAR", nullable=False)
+    status: Column[str] = Column(Enum(InvoiceStatus), nullable=False)
+    due_date: Column[datetime] = Column(DateTime, nullable=False)
+    issue_date: Column[datetime] = Column(DateTime, nullable=False)
+    customer_name: Column[str] = Column(String, nullable=False)
+    description: Column[str] = Column(String, nullable=True)
+    created_at: Column[datetime] = Column(
+        DateTime, default=datetime.now, nullable=False
+    )
 
 
 __all__ = ("InvoiceStatus", "Invoice")
