@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
     @property
-    def is_sqlite_db(self) -> bool:
+    def using_sqlite_db(self) -> bool:
         return self.DATABASE_URL.startswith("sqlite")
 
 
