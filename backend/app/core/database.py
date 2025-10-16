@@ -1,9 +1,24 @@
 from collections.abc import Iterator
+from pathlib import Path
+import re
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 
 from .config import settings
+
+
+"""
+Ensures the parent directory for the SQLite database file exists if a SQLite database is being used.
+
+This prevents errors when the application attempts to create or access the SQLite database file
+in a directory that does not yet exist.
+"""
+if settings.using_sqlite_db:
+    db_path_match = re.search(r"sqlite:///(.+)", settings.DATABASE_URL)
+    if db_path_match:
+        db_file_path = Path(db_path_match.group(1))
+        db_file_path.parent.mkdir(parents=True, exist_ok=True)
 
 
 engine = create_engine(
