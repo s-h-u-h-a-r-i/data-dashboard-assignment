@@ -57,4 +57,4 @@ class SummaryMetrics(BaseModel):
     invoices: InvoicesSummary = Field(..., description="Invoice statistics")
 
 
-__all__ = ("MonthlyBreakdown", "PaymentsSummary", "InvoicesSummary", "SummaryMetricss")
+__all__ = ("MonthlyBreakdown", "PaymentsSummary", "InvoicesSummary", "SummaryMetrics")
