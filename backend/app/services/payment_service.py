@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.schemas.payment import PaymentListResponse, PaymentResponse
 from app.models.payment import Payment, PaymentStatus
-from backend.app.schemas.common import PaginationMetadata
+from app.schemas.common import PaginationMetadata
 
 
 def get_payments(

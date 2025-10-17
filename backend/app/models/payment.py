@@ -20,7 +20,7 @@ class Payment(Base):
     )
     amount: Column[float] = Column(Float, nullable=False)
     currency: Column[str] = Column(String, default="ZAR", nullable=False)
-    status: Column[str] = Column(Enum(PaymentStatus), nullable=False)
+    status: Column[PaymentStatus] = Column(Enum(PaymentStatus), nullable=False)
     payment_date: Column[datetime] = Column(DateTime, nullable=False)
     customer_name: Column[str] = Column(String, nullable=False)
     description: Column[str] = Column(String, nullable=True)

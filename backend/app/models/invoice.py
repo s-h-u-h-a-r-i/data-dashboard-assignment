@@ -21,7 +21,7 @@ class Invoice(Base):
     )
     amount: Column = Column(Float, nullable=False)
     currency: Column[str] = Column(String, default="ZAR", nullable=False)
-    status: Column[str] = Column(Enum(InvoiceStatus), nullable=False)
+    status: Column[InvoiceStatus] = Column(Enum(InvoiceStatus), nullable=False)
     due_date: Column[datetime] = Column(DateTime, nullable=False)
     issue_date: Column[datetime] = Column(DateTime, nullable=False)
     customer_name: Column[str] = Column(String, nullable=False)

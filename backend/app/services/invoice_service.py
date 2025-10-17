@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.schemas.invoice import InvoiceListResponse, InvoiceResponse
 from app.models.invoice import Invoice, InvoiceStatus
-from backend.app.schemas.common import PaginationMetadata
+from app.schemas.common import PaginationMetadata
 
 
 def get_invoices(
