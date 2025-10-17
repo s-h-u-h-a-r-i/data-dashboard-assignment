@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Dict, Any
 
 from pydantic import BaseModel, Field
@@ -31,7 +31,8 @@ class AssistantResponse(BaseModel):
     response: str = Field(..., description="AI-generated response")
     query: str = Field(..., description="Original user query")
     timestamp: datetime = Field(
-        default_factory=datetime.now, description="Response timestamp"
+        default_factory=lambda: datetime.now(timezone.utc),
+        description="Response timestamp",
     )
     model: str = Field(..., description="AI model used")
     token_usage: Optional[Dict[str, int]] = Field(

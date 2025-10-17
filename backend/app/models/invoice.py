@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import StrEnum, auto
 
 from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
@@ -27,7 +27,9 @@ class Invoice(Base):
     customer_name: Column[str] = Column(String, nullable=False)
     description: Column[str] = Column(String, nullable=True)
     created_at: Column[datetime] = Column(
-        DateTime, default=datetime.now, nullable=False
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False,
     )
 
 
