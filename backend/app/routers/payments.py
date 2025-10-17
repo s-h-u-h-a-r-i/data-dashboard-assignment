@@ -1,13 +1,13 @@
 from datetime import datetime
-from math import ceil
 from typing import Annotated, Optional
+
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
-from app.models.payment import Payment, PaymentStatus
-from app.schemas.payment import PaymentListResponse, PaymentResponse
+from app.models.payment import PaymentStatus
+from app.schemas.payment import PaymentListResponse
 from app.core.database import get_db
-from app.schemas.common import PaginationMetadata
+from app.services.payment_service import get_payments as get_payments_service
 
 
 router = APIRouter(prefix="/payments", tags=["payments"])
@@ -27,37 +27,14 @@ async def get_payments(
     end_date: Annotated[Optional[datetime], Query()] = None,
     db: Session = Depends(get_db),
 ) -> PaymentListResponse:
-    query = db.query(Payment)
-
-    if status is not None:
-        query = query.filter(Payment.status == status)
-
-    if start_date is not None:
-        query = query.filter(Payment.payment_date >= start_date)
-
-    if end_date is not None:
-        query = query.filter(Payment.payment_date <= end_date)
-
-    total_items = query.count()
-    total_pages = ceil(total_items / page_size) if total_items > 0 else 0
-
-    offset = (page - 1) * page_size
-    payments = (
-        query.order_by(Payment.payment_date.desc())
-        .offset(offset)
-        .limit(page_size)
-        .all()
+    return get_payments_service(
+        db=db,
+        page=page,
+        page_size=page_size,
+        status=status,
+        start_date=start_date,
+        end_date=end_date,
     )
-
-    payment_responses = [
-        PaymentResponse.model_validate(payment) for payment in payments
-    ]
-
-    pagination = PaginationMetadata(
-        page=page, page_size=page_size, total_items=total_items, total_pages=total_pages
-    )
-
-    return PaymentListResponse(items=payment_responses, pagination=pagination)
 
 
 __all__ = ("router",)

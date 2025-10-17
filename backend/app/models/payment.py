@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import StrEnum, auto
 
 from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
@@ -20,12 +20,14 @@ class Payment(Base):
     )
     amount: Column[float] = Column(Float, nullable=False)
     currency: Column[str] = Column(String, default="ZAR", nullable=False)
-    status: Column[str] = Column(Enum(PaymentStatus), nullable=False)
+    status: Column[PaymentStatus] = Column(Enum(PaymentStatus), nullable=False)
     payment_date: Column[datetime] = Column(DateTime, nullable=False)
     customer_name: Column[str] = Column(String, nullable=False)
     description: Column[str] = Column(String, nullable=True)
     created_at: Column[datetime] = Column(
-        DateTime, default=datetime.now, nullable=False
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False,
     )
 
 
