@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from typing import Optional, Dict, Any, Annotated
+from typing import Optional, Dict, Annotated
 
 from pydantic import BaseModel, Field
 
@@ -9,7 +9,7 @@ class AssistantRequest(BaseModel):
     ### Represents a request to the AI assistant.
 
     This model defines the structure for incoming requests, typically containing
-    the user's query and optional additional context.
+    the user's query.
     """
 
     query: Annotated[
@@ -17,10 +17,6 @@ class AssistantRequest(BaseModel):
         Field(
             ..., min_length=1, max_length=1000, description="User's question or request"
         ),
-    ]
-    context: Annotated[
-        Optional[Dict[str, Any]],
-        Field(None, description="Additional context for the query"),
     ]
 
 
