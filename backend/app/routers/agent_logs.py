@@ -1,8 +1,9 @@
-from typing import Annotated, Any, Dict, Optional
-from fastapi import APIRouter, Query, status
+from typing import Annotated, Optional
+from fastapi import APIRouter, Query
 
-from app.schemas.logs import LogsResponse, LogEntry
+from app.schemas.logs import LogsResponse
 from app.core.logger import LogEntryType, LoggerStats, memory_logger
+from app.services.logs_service import get_formatted_logs
 
 router = APIRouter(prefix="/agent-logs", tags=["logs"])
 
@@ -17,37 +18,7 @@ async def get_agent_logs(
     limit: Annotated[int, Query(ge=1, le=500)] = 50,
     log_type: Annotated[Optional[LogEntryType], Query()] = None,
 ) -> LogsResponse:
-    logs = memory_logger.get_logs(limit=limit, log_type=log_type)
-
-    log_entries = []
-    for log in logs:
-        parameters: Optional[Dict[str, Any]] = None
-        if log.type == LogEntryType.AI_INTERACTION:
-            parameters = {"query": log.query}
-        elif log.type == LogEntryType.REQUEST:
-            parameters = log.parameters
-
-        status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-        if log.type == LogEntryType.REQUEST:
-            status_code = log.status_code
-        elif log.type == LogEntryType.AI_INTERACTION and not log.error:
-            status_code = status.HTTP_200_OK
-
-        log_entries.append(
-            LogEntry(
-                timestamp=log.timestamp,
-                endpoint=(
-                    "" if log.type == LogEntryType.AI_INTERACTION else log.endpoint
-                ),
-                method=log.method if log.type == LogEntryType.REQUEST else "",
-                parameters=parameters,
-                status_code=status_code,
-                error=log.error_type if log.type == LogEntryType.ERROR else log.error,
-                duration_ms=None if log.type == LogEntryType.ERROR else log.duration_ms,
-            )
-        )
-
-    return LogsResponse(logs=log_entries, total_count=len(log_entries))
+    return get_formatted_logs(limit=limit, log_type=log_type)
 
 
 @router.get(

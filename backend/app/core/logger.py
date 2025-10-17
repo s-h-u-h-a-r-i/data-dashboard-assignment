@@ -339,7 +339,7 @@ class InMemoryLogger:
                 case LogEntryType.ERROR:
                     error_logs += 1
                 case _:
-                    assert_never
+                    assert_never(log.type)
 
         return LoggerStats(
             total_logs=total_logs,
@@ -363,4 +363,13 @@ class InMemoryLogger:
 memory_logger: Type[InMemoryLogger] = InMemoryLogger
 
 
-__all__ = ("InMemoryLogger", "memory_logger", "LogEntryType", "LoggerStats")
+__all__ = (
+    "InMemoryLogger",
+    "memory_logger",
+    "LogEntryType",
+    "LoggerStats",
+    "LogEntry",
+    "RequestLogEntry",
+    "AIInteractionLogEntry",
+    "ErrorLogEntry",
+)
