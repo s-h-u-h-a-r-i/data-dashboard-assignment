@@ -63,6 +63,11 @@ export interface SectionProps {
    * @default 3
    */
   skeletonLines?: number;
+  /**
+   * Whether the card header should be sticky (remains visible at the top while scrolling)
+   * @default false
+   */
+  stickyHeader?: boolean;
 }
 
 /**
@@ -83,7 +88,10 @@ type SectionContentProps = Pick<
  * Props for the SectionHeader component.
  * Extracted subset of SectionProps for header rendering.
  */
-type SectionHeaderProps = Pick<SectionProps, "title" | "subtitle" | "action">;
+type SectionHeaderProps = Pick<
+  SectionProps,
+  "title" | "subtitle" | "action" | "stickyHeader"
+>;
 
 /**
  * Props for the ErrorAlert component.
@@ -120,20 +128,33 @@ function SectionHeader({
   title,
   subtitle,
   action,
+  stickyHeader,
 }: SectionHeaderProps): JSX.Element | null {
   if (!title && !action) return null;
 
   return (
-    <CardHeader
-      title={title ? <Typography variant="h6">{title}</Typography> : null}
-      subheader={subtitle}
-      action={action}
-      sx={{
-        borderBottom: 1,
-        borderCollapse: "divider",
-        pb: 1.5,
-      }}
-    />
+    <Box
+      sx={
+        stickyHeader
+          ? {
+              position: "sticky",
+              top: 0,
+              zIndex: 1,
+              bgcolor: "background.paper",
+            }
+          : undefined
+      }>
+      <CardHeader
+        title={title ? <Typography variant="h6">{title}</Typography> : null}
+        subheader={subtitle}
+        action={action}
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          pb: 1.5,
+        }}
+      />
+    </Box>
   );
 }
 
@@ -277,15 +298,25 @@ export function Section({
   error = null,
   showSkeleton = true,
   skeletonLines = 3,
+  stickyHeader = false,
 }: SectionProps): JSX.Element {
   return (
-    <Card elevation={elevation} sx={{ height: "100%" }}>
-      <SectionHeader title={title} subtitle={subtitle} action={action} />
+    <Card
+      elevation={elevation}
+      sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+      <SectionHeader
+        title={title}
+        subtitle={subtitle}
+        action={action}
+        stickyHeader={stickyHeader}
+      />
 
       <CardContent
         sx={{
+          flex: 1,
           minHeight: minHeight,
           position: "relative",
+          overflow: stickyHeader ? "auto" : "visible",
           "&:last-child": {
             pb: 2,
           },
