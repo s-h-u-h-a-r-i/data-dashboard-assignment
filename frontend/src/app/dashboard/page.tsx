@@ -3,6 +3,7 @@
 import { Grid, Typography } from "@mui/material";
 
 import { Section } from "@/components/Section";
+import { MetricsOverview } from "@/components/metrics";
 
 export default function DashboardPage() {
   return (
@@ -10,7 +11,7 @@ export default function DashboardPage() {
       {/* Summary Metrics */}
       <Grid size={12}>
         <Section title="Summary Metrics" subtitle="Overall financial overview">
-          <Typography>Metrics will go here (Phase 5)</Typography>
+          <MetricsOverview />
         </Section>
       </Grid>
 
