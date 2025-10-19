@@ -8,12 +8,18 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const theme = createTheme({
   palette: {
-    mode: "light",
-    primary: {
-      main: "#1976d2",
+    background: {
+      paper: "#fff",
     },
-    secondary: {
-      main: "#dc004e",
+    text: {
+      primary: "#173A5E",
+      secondary: "#46505A",
+    },
+    action: {
+      active: "#001E3C",
+    },
+    success: {
+      main: "#009688",
     },
   },
 });
