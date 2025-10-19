@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { Box, Typography } from "@mui/material";
 
 import { Section } from "@/components/Section";
+import { AgentLogs } from "@/components/logs";
 
 function DashboardHeader() {
   return (
@@ -80,7 +81,7 @@ function LogsPanel() {
         px: 3,
         py: 2,
       }}>
-      <Typography>Logs table will go here</Typography>
+      <AgentLogs />
     </Box>
   );
 }

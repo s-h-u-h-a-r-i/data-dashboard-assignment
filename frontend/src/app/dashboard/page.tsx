@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 
 import { Section } from "@/components/Section";
 import { MetricsOverview } from "@/components/metrics";
