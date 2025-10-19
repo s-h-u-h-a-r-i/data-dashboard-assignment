@@ -5,6 +5,7 @@ import { Grid, Typography } from "@mui/material";
 import { Section } from "@/components/Section";
 import { MetricsOverview } from "@/components/metrics";
 import { InvoicesTable, PaymentsTable } from "@/components/tables";
+import { MonthlyChart } from "@/components/charts";
 
 export default function DashboardPage() {
   return (
@@ -33,7 +34,7 @@ export default function DashboardPage() {
       {/* Monthly Chart */}
       <Grid size={12}>
         <Section title="Monthly Overview" subtitle="Revenue and payment trends">
-          <Typography>Chart will go here (Phase 5)</Typography>
+          <MonthlyChart />
         </Section>
       </Grid>
     </Grid>
