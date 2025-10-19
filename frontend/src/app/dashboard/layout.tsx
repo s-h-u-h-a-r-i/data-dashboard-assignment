@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 import { Section } from "@/components/Section";
 import { AgentLogs } from "@/components/logs";
+import { AIAssistant } from "@/components/assistant";
 
 function DashboardHeader() {
   return (
@@ -59,10 +60,9 @@ function DashboardSidebar() {
       <Section
         title="AI Assistant"
         subtitle="Ask questions about your data"
-        minHeight={"calc(100vh - 280px)"}
         elevation={0}
         stickyHeader>
-        <Typography>Chat interface will go here</Typography>
+        <AIAssistant />
       </Section>
     </Box>
   );
@@ -75,8 +75,8 @@ function LogsPanel() {
         flexShrink: 0,
         borderTop: 1,
         borderColor: "divider",
-        bgcolor: "Background.default",
-        maxHeight: "300px",
+        bgcolor: "background.default",
+        height: "200px",
         overflow: "auto",
         px: 3,
         py: 2,
@@ -107,19 +107,19 @@ export default function DashboardLayout({
           flex: 1,
           overflow: "hidden",
           display: "flex",
-          flexDirection: "column",
         }}>
         <Box
           sx={{
             flex: 1,
             display: "flex",
+            flexDirection: "column",
             overflow: "hidden",
           }}>
           <MainContent>{children}</MainContent>
-          <DashboardSidebar />
+          <LogsPanel />
         </Box>
 
-        <LogsPanel />
+        <DashboardSidebar />
       </Box>
     </Box>
   );

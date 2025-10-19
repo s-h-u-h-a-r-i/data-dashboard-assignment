@@ -6,4 +6,5 @@ export {
   HourglassEmpty,
   Receipt,
   TrendingUp,
+  Send,
 } from "@mui/icons-material";

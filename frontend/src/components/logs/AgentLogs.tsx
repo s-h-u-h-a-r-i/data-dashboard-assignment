@@ -59,8 +59,11 @@ export function AgentLogs(): JSX.Element {
   }
 
   return (
-    <TableContainer component={Paper} elevation={0}>
-      <Table size="small">
+    <TableContainer
+      component={Paper}
+      elevation={0}
+      sx={{ maxHeight: "100%", overflow: "auto" }}>
+      <Table size="small" stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell>Time</TableCell>
