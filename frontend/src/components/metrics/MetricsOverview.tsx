@@ -52,7 +52,7 @@ export function MetricsOverview(): JSX.Element | null {
   return (
     <Grid container spacing={2}>
       {/* Total Payments */}
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size="auto">
         <MetricCard
           title="Total Payments"
           value={formatCurrency(payments.total_amount)}
@@ -63,7 +63,7 @@ export function MetricsOverview(): JSX.Element | null {
       </Grid>
 
       {/* Paid Payments */}
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size="auto">
         <MetricCard
           title="Paid"
           value={formatCurrency(payments.paid_amount)}
@@ -74,7 +74,7 @@ export function MetricsOverview(): JSX.Element | null {
       </Grid>
 
       {/* Pending Payments */}
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size="auto">
         <MetricCard
           title="Pending"
           value={formatCurrency(payments.pending_amount)}
@@ -85,7 +85,7 @@ export function MetricsOverview(): JSX.Element | null {
       </Grid>
 
       {/* Total Invoices */}
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size="auto">
         <MetricCard
           title="Total Invoices"
           value={formatCurrency(invoices.total_amount)}
@@ -96,7 +96,7 @@ export function MetricsOverview(): JSX.Element | null {
       </Grid>
 
       {/* Paid Invoices */}
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size="auto">
         <MetricCard
           title="Invoices Paid"
           value={formatCurrency(invoices.paid_amount)}
@@ -107,7 +107,7 @@ export function MetricsOverview(): JSX.Element | null {
       </Grid>
 
       {/* Unpaid Invoices */}
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size="auto">
         <MetricCard
           title="Unpaid"
           value={formatCurrency(invoices.unpaid_amount)}
@@ -118,7 +118,7 @@ export function MetricsOverview(): JSX.Element | null {
       </Grid>
 
       {/* Overdue Invoices */}
-      <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+      <Grid size="auto">
         <MetricCard
           title="Overdue"
           value={formatCurrency(invoices.overdue_amount)}
