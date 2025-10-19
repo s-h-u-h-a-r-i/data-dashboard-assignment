@@ -4,6 +4,7 @@ import { Grid, Typography } from "@mui/material";
 
 import { Section } from "@/components/Section";
 import { MetricsOverview } from "@/components/metrics";
+import { InvoicesTable, PaymentsTable } from "@/components/tables";
 
 export default function DashboardPage() {
   return (
@@ -18,14 +19,14 @@ export default function DashboardPage() {
       {/* Payments Table */}
       <Grid size={12}>
         <Section title="Recent Payments" subtitle="Latest payment transactions">
-          <Typography>Payments table will go here (Phase 5)</Typography>
+          <PaymentsTable />
         </Section>
       </Grid>
 
       {/* Invoices Table */}
       <Grid size={12}>
         <Section title="Recent Invoices" subtitle="Latest invoice records">
-          <Typography>Invoices table will go here (Phase 5)</Typography>
+          <InvoicesTable />
         </Section>
       </Grid>
 

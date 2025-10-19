@@ -14,18 +14,12 @@ import {
   Receipt,
   TrendingUp,
 } from "@/icons";
+import { formatCurrency } from "@/utils";
 
 import { MetricCard } from "./MetricCard";
 
 export function MetricsOverview(): JSX.Element | null {
   const { data, isLoading, error } = useSummary();
-
-  const formatCurrency = (amount: number, currency: string = "ZAR") => {
-    return new Intl.NumberFormat("en-ZA", {
-      style: "currency",
-      currency: currency,
-    }).format(amount);
-  };
 
   const formatCount = (count: number) => {
     return `${count} ${count === 1 ? "transaction" : "transactions"}`;
