@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
+from decimal import Decimal
 from enum import StrEnum, auto
 
-from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
+from sqlalchemy import Column, Integer, Numeric, String, DateTime, Enum
 
 from app.core.database import Base
 
@@ -19,7 +20,7 @@ class Invoice(Base):
     invoice_number: Column[str] = Column(
         String, unique=True, nullable=False, index=True
     )
-    amount: Column = Column(Float, nullable=False)
+    amount: Column[Decimal] = Column(Numeric(precision=10, scale=2), nullable=False)
     currency: Column[str] = Column(String, default="ZAR", nullable=False)
     status: Column[InvoiceStatus] = Column(Enum(InvoiceStatus), nullable=False)
     due_date: Column[datetime] = Column(DateTime, nullable=False)

@@ -1,7 +1,8 @@
 from datetime import datetime, timezone
+from decimal import Decimal
 from enum import StrEnum, auto
 
-from sqlalchemy import Column, Integer, String, Float, DateTime, Enum
+from sqlalchemy import Column, Integer, Numeric, String, DateTime, Enum
 
 from app.core.database import Base
 
@@ -18,7 +19,7 @@ class Payment(Base):
     transaction_id: Column[str] = Column(
         String, unique=True, nullable=False, index=True
     )
-    amount: Column[float] = Column(Float, nullable=False)
+    amount: Column[Decimal] = Column(Numeric(precision=10, scale=2), nullable=False)
     currency: Column[str] = Column(String, default="ZAR", nullable=False)
     status: Column[PaymentStatus] = Column(Enum(PaymentStatus), nullable=False)
     payment_date: Column[datetime] = Column(DateTime, nullable=False)
